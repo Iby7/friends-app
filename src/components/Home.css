@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.teamYouOwn , .teamYouCreate{
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    padding: 5px;
+    border: 1px solid rgb(0, 102, 255);
+    margin: 10px 35px;
+}
