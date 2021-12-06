@@ -1,24 +1,27 @@
 import { Form, Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router';
 import { auth } from '../firebase';
 import {db} from '../firebase';
 import { doc, setDoc } from "firebase/firestore";
 
 
 const Signup = () => {
-  
-  const onFinish = async ({ password, email }) => {
+  const navigate = useNavigate();
+    const onFinish = async ({ password, email }) => {
       try {
           const user = await createUserWithEmailAndPassword(auth, email, password);
           console.log(user);
-          alert("Account created successfully.")
+          navigate('../');
+          console.log("Account created successfully.")
         .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    setDoc(doc(db, "users",user.uid), {
-      name: email,
+    setDoc(doc(db, "users",user.email, user.uid), {
       id: user.uid,
+      name: this.name,
+      email: this.email
       
     });
     // ...
@@ -29,7 +32,7 @@ const Signup = () => {
     // ..
   });  
       } catch (error) {
-          console.log(error.message);
+          alert("Invalid credentials");
       }
       
   };

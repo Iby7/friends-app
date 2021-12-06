@@ -13,13 +13,14 @@ const Login = () => {
 
   onAuthStateChanged(auth, (currentUser) => setCurUser(currentUser));
 
-  const onFinish = async ({ password, email }) => {
+  const onFinish = async ({ email, password }) => {
       try {
           const user = await signInWithEmailAndPassword(auth, email, password);
           navigate('home');
       } catch (error) {
           setModalMes(error.message);
           setModal(true);
+          alert("Wrong credentials")
       }
   };
 
