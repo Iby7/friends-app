@@ -32,7 +32,7 @@ const Signup = () => {
     // ..
   });  
       } catch (error) {
-          alert("Invalid credentials");
+          console.log(error.message);
       }
       
   };
